@@ -10,8 +10,13 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showThankYou, setShowThankYou] = useState(false);
 
+  let allSkills = [];
+  skillSets.map((skillSet) => {
+    allSkills.push(...skillSet.skills);
+  });
+
   const handleNext = () => {
-    if (currentIndex < data.length - 1) {
+    if (currentIndex < allSkills.length - 1) {
       setCurrentIndex(currentIndex + 1);
     } else {
       setShowThankYou(true);
@@ -25,15 +30,16 @@ export default function Home() {
           <h2>Thank you!</h2>
         </div>
       ) : (
-        skillSets.length > 0 && (
-          skillSets.map((skillset) => {
-        return skillset.skills.map((skill) => {
-          return <SkillCard key={skill.id} skill={skill} />;
-        });
-      })
+        allSkills.length > 0 && (
+          <SkillCard
+            key={allSkills[currentIndex].id}
+            skill={allSkills[currentIndex]}
+          />
         )
       )}
-      <div></div>
+       {!showThankYou && (
+        <button onClick={handleNext}>Next</button>
+      )}
     </main>
   );
 }
