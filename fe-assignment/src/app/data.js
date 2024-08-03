@@ -1,4 +1,4 @@
-{
+export const skillsData = {
     "message": "Model fetched",
     "data": [
         {
