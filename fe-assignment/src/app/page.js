@@ -30,10 +30,40 @@ export default function Home() {
   };
 
   const handleSubmitSkill = () => {
-    console.log("Skill ID: ",allSkills[currentIndex].id,"Skill name: ",allSkills[currentIndex].name," Looks good!")
+    console.log(
+      "Skill ID: ",
+      allSkills[currentIndex].id,
+      "Skill name: ",
+      allSkills[currentIndex].name,
+      " Looks good!"
+    );
     handleNext();
-  }
+  };
 
+  const handleEdit = (e) => {
+    let inputElems = document.querySelectorAll("input");
+    if (e.target.innerHTML === "Suggest Edits") {
+      e.target.innerHTML = "Save";
+      e.target.style.background = 'rgb(190 242 100)'
+      document.querySelector("#submit-btn").style.visibility = "hidden";
+  
+      inputElems.forEach((elem) => {
+        elem.disabled = false;
+      });
+
+    } else if (e.target.innerHTML === "Save") {
+      e.target.innerHTML = "Suggest Edits";
+       e.target.style.background = 'rgb(248 113 113)'
+      document.querySelector("#submit-btn").style.visibility = "visible";
+      inputElems.forEach((elem) => {
+        elem.disabled = true;
+      });
+      for(let i=0; i<5;i++){
+        allSkills[currentIndex].skill_levels[i].skill_level_description = inputElems[i].value 
+      }
+      console.log("Skills updated: ", allSkills[currentIndex].skill_levels)
+    }
+  };
   return (
     <main className="flex min-h-screen flex-col p-24">
       {showThankYou ? (
@@ -52,7 +82,7 @@ export default function Home() {
         <div className="flex justify-between">
           <div className="flex items-center w-full">
             <button
-              className="place-self-start border-2 border-black p-1 w-20 m-4 ml-0"
+              className={`place-self-start border-2 border-black p-1 w-20 m-4 ml-0 ${currentIndex === 0 ? 'bg-stone-300' : ''}`}
               disabled={currentIndex == 0}
               onClick={handlePrev}
             >
@@ -67,13 +97,15 @@ export default function Home() {
           </div>
           <div className="flex w-full items-center justify-end">
             <button
-              className="border-2 border-black p-1 w-30 m-4"
+              id="submit-btn"
+              className="border-2 border-black p-1 w-30 m-4 bg-green-400"
               onClick={handleSubmitSkill}
             >
-              Looks good to me
+              Looks Good to me
             </button>
             <button
-              className="border-2 border-black p-1 w-30"
+              className="border-2 border-black p-1 w-30 bg-red-400"
+              onClick={handleEdit}
             >
               Suggest Edits
             </button>
