@@ -1,6 +1,12 @@
 "use client";
 
-export default function SkillCard({ skill }) {
+
+import { useState, useEffect, useContext } from "react";
+import { MyContext } from "@/context/MyContext";
+
+
+export default function SkillCard({ skill }) { 
+const {handleTextChange} = useContext(MyContext);
   return (
     <div>
       <h1 className="font-extrabold text-3xl mb-4">{skill.name}</h1>
@@ -14,7 +20,7 @@ export default function SkillCard({ skill }) {
           return (
             <div key={lev.id} className="bg-stone-200 flex items-center border-b-2 border-black w-full">
               <span className="mr-20 ml-4 w-5 p-5 font-semibold">{lev.skill_level_mark}</span>
-              <input id={lev.id} className="w-full h-full p-5 font-semibold bg-stone-200" disabled defaultValue={lev.skill_level_description} />
+              <input id={lev.id} className="w-full h-full p-5 font-semibold bg-stone-200" disabled defaultValue={lev.skill_level_description} onChange={handleTextChange} />
             </div>
           );
         })}
