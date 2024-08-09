@@ -30,14 +30,15 @@ export const MyProvider = ({ children }) => {
       ]
     })
     const [skillsVerified, setSkillsVerified] = useState(0);
-
     useEffect(() => {
         const fetchData = async () => {  
         try{
-          const response = await axios.get(apiDataUrl, {
+          const response = await axios({
+            method: 'get',
+            baseURL: apiDataUrl,
             headers : {
               'Authorization': `Bearer ${token}`
-            }, 
+            },
           });
           console.log(response.data)
           setData(response.data.data);
@@ -60,13 +61,14 @@ export const MyProvider = ({ children }) => {
             if(!response.ok){
               throw new Error("Failed to fetch data");
             }
-           
+           setDataFetched(true);
         }catch(error){
           console.log("Error occured: ", error)
         }
       }
-
-      fetchData();
+      if(!dataFetched){
+        fetchData();
+      }    
       },[])
 
      
@@ -152,12 +154,32 @@ export const MyProvider = ({ children }) => {
             })
             allSkills[currentIndex].skill_levels[i].skill_level_description = inputElems[i].value 
           }
+            try{
+              const res = await axios({
+              method: 'post',
+              baseURL: apiFeedbackUrl,
+              headers : {
+                'Authorization': `Bearer ${token}`
+              },
+              data: {
+                "skill_validator_entity_id":"8c189161-3266-4bd7-9d3e-37f33794a916",
+                "skill_level_updates": tempSkillLevelFeedbackArr
+              }
+            }
+          )
+          console.log(res);
+          setSkillsVerified(skillsVerified + 1);
+          handleNext();
+        }catch(error){
+          console.log("Error sending Feedback: ", error)
+        }
+          
         
         }
       };
 
     return (
-        <MyContext.Provider value={{ state, data, skillSets, currentIndex, showThankYou, dataFetched, allSkills, skillLevelFeedback, handleSubmitSkill, handleNext, handlePrev, handleEdit, handleTextChange }}>
+        <MyContext.Provider value={{ state, data, skillSets, currentIndex, showThankYou, dataFetched, allSkills, skillLevelFeedback, handleSubmitSkill, handleNext, handlePrev, handleEdit, handleTextChange, skillsVerified }}>
             {children}
         </MyContext.Provider>
     );

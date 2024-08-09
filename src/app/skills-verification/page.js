@@ -13,7 +13,6 @@ function SkillVerification() {
 
  
   return (
-    // <h1>Hello</h1>
     dataFetched && <main className="flex min-h-screen flex-col p-24">
       {showThankYou ? (
         <div>
@@ -43,6 +42,13 @@ function SkillVerification() {
             >
               Next
             </button>
+            <a href='/' className="place-self-start border-2 border-black p-1 w-20 mt-4 ml-4 text-center">
+            <button
+              // className="place-self-start border-2 border-black p-1 w-20 mt-4 ml-4"
+            >
+              Home
+            </button>
+            </a>
           </div>
           <div className="flex w-full items-center justify-end">
             <button
