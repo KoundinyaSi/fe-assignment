@@ -4,7 +4,19 @@ import { useState, useEffect } from "react";
 import { skillsData } from "./data";
 import SkillCard from "./skillCard";
 
+const apiUrl = "https://api-dev.proofofskill.org/v1.0.0/api/entity/skill-validators/associated-skillsets";
+
 export default function Home() {
+
+  useEffect(() => {
+    // try{
+    //     fetch(apiUrl)
+
+    // }catch(error){
+    //   console.log("Error occured: ", error)
+    // }
+  },[])
+
   const [data, setData] = useState(skillsData);
   const [skillSets, setSkillsets] = useState(skillsData.data);
   const [currentIndex, setCurrentIndex] = useState(0);
