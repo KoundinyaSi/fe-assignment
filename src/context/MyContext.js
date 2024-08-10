@@ -3,7 +3,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnRpdHlJZCI6IjhjMTg5MTYxLTMyNjYtNGJkNy05ZDNlLTM3ZjMzNzk0YTkxNiIsInNjb3BlIjpbIkdVRVNUIiwiU0tJTExfVkFMSURBVE9SIl0sImlhdCI6MTcyMzIwMjY3MSwiZXhwIjoxNzIzMjg5MDcxfQ.3iSRfuHisoQFGFXe2eoIeDExG-rXOHjGyYjFkk6JYx4`;
+const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbnRpdHlJZCI6IjY0NmE3ZjFlLWEyNzMtNGY2OS05ZjY4LTEyMGVlMzMwNGE2MSIsInNjb3BlIjpbIkdVRVNUIiwiU0tJTExfVkFMSURBVE9SIl0sImlhdCI6MTcyMzIyNTI2NCwiZXhwIjoxNzIzMzExNjY0fQ.H-gpQYwXWQyWgJSk6yXNCWIQ3qtN1CXJ38_JmQD6xBk`;
 const apiDataUrl = "https://api-dev.proofofskill.org/v1.0.0/api/entity/skill-validators/associated-skillsets";
 const entityId = `8c189161-3266-4bd7-9d3e-37f33794a916`;
 const apiFeedbackUrl = `https://api-dev.proofofskill.org/v1.0.0/api/assessment/skill-level-feedback`;
